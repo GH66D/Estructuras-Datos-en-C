@@ -1,0 +1,34 @@
+Espec BiCola
+    nuevaBi:->BiCola;
+    formarBiIzq: Elem, BiCola -> BiCola;
+    formarBiDer: BiCola, Elem -> BiCola;
+    esnuevaBi: BiCola -> Bool;
+    izquierdoBi: BiCola -> Elem;
+    derechoBi: BiCola -> Elem;
+    desformarBiIzq: BiCola -> BiCola;
+    desformarBiDer: BiCola -> BiCola;
+
+    Axiomas: Elem e, Bicola q;
+      [b1] esnuevaBi(nuevaBi())= Verdadero;
+      [b2] esnuevaBi(formarBiIzq(e,q))= Falso;
+      [b3] esnuevaBi(formarBiDer(q,e))= Falso;
+      [b4] izquierdoBi(nuevaBi())= ERROR;
+      [b5] izquierdoBi(formarBiIzq(e,q))= e; //[e,a,r,b,c,d]
+      [b6] izquierdoBi(formarBiDer(q,e))= Si esnuevaBi(q) ret e;
+                                          Sino ret izquierdoBi(q);
+      [b7] derechoBi(nuevaBi()) = ERROR;
+      [b8] derechoBi(formarBiIzq(e,q))=Si esnuevaBi(e) ret e;
+                                       Sino ret derechoBi(q);
+      [b9] derechoBi(formarBiDer(q,e))= e;
+      [b10] desformarBiIzq(nuevaBi())=ERROR;
+      [b11] desformarBiIzq(formarBiIzq(e,q))=q;
+      [b12] desformarBiIzq(formarBiDer(q,e))=
+                         Si esnuevaBi(q) ret q;
+                         Sino ret formarBiDer(desformarBiIzq(q),e);
+      [b13] desformarBiDer(nuevaBi())= ERROR;
+      [b14] desformarBiDer(formarBiIzq(e,q))=
+                         Si esnuevaBi(q) ret q;
+                         Sino ret formarBiIzq(e,desformarBiDer(q));
+      [b15] desformarBiDer(formarBiDer(q,e))= q;
+    Fin BiCola.
+
